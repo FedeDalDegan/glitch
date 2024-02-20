@@ -24,17 +24,15 @@ socket.on("rendicion", info => {
 const socket = io()
 
 const chatBox = document.getElementById("chatBox")
-const messageLogs = document.getElementById("messageBox")
+const messageLogs = document.getElementById("messageLogs")
 let user;
 
 Swal.fire({
     title: "Inicio de sesion",
     input: "text",
     text: "Por favor ingrese su usuario",
-    inputValidator: (value) => {
-        if(value){
-            return !valor && "Ingrese un valor valido" // En caso de que no haya un valor ingresado, retornada este mensaje
-        }
+    inputValidator: (valor) => {
+        return !valor && 'Ingrese un valor valido' // En caso de que no haya un valor ingresado, retornara este mensaje
     },
     allowOutsideClick: false, // No puede salir de la alerta. Lo obligo a ingresar un usuario
 }).then(resultado => {
@@ -43,19 +41,18 @@ Swal.fire({
 })
 
 // Estos mensajes se almacenan en la constante "mensajes"
-chatBox.addEventListener("keyup", (e) => {
-    if(e.key === "Enter"){
+chatBox.addEventListener("change", (e) => {
         if(chatBox.value.trim().length > 0){
-            socket.emit("mensaje", {usuario: user, mensaje: chatBox.value, hora: new Date().ToLocaleString()})
+            socket.emit('mensaje', { usuario: user, mensaje: chatBox.value, hora: new Date().toLocaleString() })
             chatBox.value = ""
         }
-    }
+
 })
 
 // Mostramos el registro de mensajes sumado al usuario que los envia
-socket.on("mensajeLogs", info => {
+socket.on('mensajeLogs', info => {
     messageLogs.innerHTML = ""
     info.forEach(mensaje => {
-        messageLogs.innerHTML += `<p>${mensaje.hora}: ${mensaje.usuario} Dice: ${mensaje.mensaje}</p>`
+        messageLogs.innerHTML += `<p>${mensaje.hora}hs. Usuario ${mensaje.usuario} dice: ${mensaje.mensaje}</p>`
     })
 })

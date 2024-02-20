@@ -57,8 +57,8 @@ app.use("/index", (req, res) => { // Pagina de inicio
     res.status(200).send("<h1>Bienvenido</h1>")
 })
 app.use("/products", productsRouter, express.static(__dirname + "/public"))
-app.use("/static", express.static(__dirname + "/public")) // Definimos el enrutado de la carpeta publica. Es decir, en la ruta "static", voy a trabajar con los elementos publicos de mi aplicacion
-app.use("/cart", cartRouter)
+// app.use("/static", express.static(__dirname + "/public")) // Definimos el enrutado de la carpeta publica. Es decir, en la ruta "static", voy a trabajar con los elementos publicos de mi aplicacion
+app.use("/cart", cartRouter, express.static(__dirname + "/public"))
 app.use("/chat", chatRouter, express.static(__dirname + "/public"))
 // .single Hace referencia a enviar un archivo a la vez. (upload. Tiene muchos metodos. Se pueden enviar Arrays o mas de un archivo a la vez)
 app.post("/upload", upload.single("product") , (req, res) => { // Generamos una ruta para poder cargar imagenes con metodo POST

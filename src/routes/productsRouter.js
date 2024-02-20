@@ -14,7 +14,7 @@ productsRouter.get('/', async (req, res) => {
         if (!limite)
             limite = prods.length
         const prodsLimit = prods.slice(0, limite)
-        res.status(200).render("home", { // Este es el nombre del handlebar home
+        res.status(200).render("templates/home", { // Este es el nombre del handlebar home
             mostrarProductos: true,
             productos: prodsLimit, 
             css: "home.css"
